@@ -1,8 +1,8 @@
 from beanie import init_beanie
 from motor.motor_asyncio import AsyncIOMotorClient
 
-from src import config
-from src.db.models.chat_info import ChatInfo
+import config
+from db.models.chat_info import ChatInfo
 
 MODELS = [
     ChatInfo

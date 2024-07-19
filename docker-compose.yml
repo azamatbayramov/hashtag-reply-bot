@@ -1,0 +1,27 @@
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: hashtag_reply_bot_mongodb
+    networks:
+      - hashtag_reply_bot_network
+    volumes:
+      - hashtag_reply_bot_data:/data/db
+
+  bot:
+    build: .
+    container_name: hashtag_reply_bot
+    networks:
+      - hashtag_reply_bot_network
+    env_file:
+      - .env
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017
+    depends_on:
+      - mongodb
+
+volumes:
+  hashtag_reply_bot_data:
+
+networks:
+  hashtag_reply_bot_network:
+    driver: bridge
